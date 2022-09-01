@@ -21,7 +21,7 @@ public class VendasApplication {
 
    @GetMapping("/hello")
     public String HelloWorld(){
-       return String.format("applicationNameProperties: %s\napplicationNameConfiguration: %s",
+       return String.format("applicationNameProperties: %s \n applicationNameConfiguration: %s",
                applicationNameProperties,
                applicationNameConfiguration);
     }
