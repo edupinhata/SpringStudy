@@ -28,11 +28,32 @@ public class VendasApplication {
     @Bean
     public CommandLineRunner init(@Autowired Clientes clientes){
        return args -> {
-            clientes.salvar(new Cliente("Eduardo"));
-           clientes.salvar(new Cliente("Esther"));
+           clientes.save(new Cliente("Eduardo"));
+           clientes.save(new Cliente("Esther"));
+           clientes.save(new Cliente("Fulano"));
 
            List<Cliente> allClientes = clientes.getAll();
-            allClientes.forEach(System.out::println);
+           allClientes.forEach(System.out::println);
+
+           System.out.println("======  UPDATING TEST");
+           List<Cliente> cList = clientes.getByName("Fulano");
+
+           for (Cliente cliente : cList) {
+               System.out.printf("cliente: %s | id: %d\n", cliente.getNome(), cliente.getId());
+           }
+
+           Cliente newC = new Cliente( cList.get(0).getId(), "Ciclano");
+           System.out.printf("newC: %s | id: %d\n", cList.get(0).getNome(), cList.get(0).getId());
+           clientes.update(newC);
+
+           allClientes = clientes.getAll();
+           allClientes.forEach(System.out::println);
+
+           System.out.println("====== DELETE TEST");
+           clientes.delete(cList.get(0));
+
+           allClientes = clientes.getAll();
+           allClientes.forEach(System.out::println);
        };
     }
 
