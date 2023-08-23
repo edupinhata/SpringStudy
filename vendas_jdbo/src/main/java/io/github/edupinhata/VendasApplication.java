@@ -28,8 +28,9 @@ public class VendasApplication {
     @Bean
     public CommandLineRunner init(@Autowired Clientes clientes){
        return args -> {
-            clientes.salvar(new Cliente("Eduardo"));
-           clientes.salvar(new Cliente("Esther"));
+           clientes.save(new Cliente("Eduardo"));
+           clientes.save(new Cliente("Esther"));
+           clientes.save(new Cliente("Fulano"));
 
            List<Cliente> allClientes = clientes.getAll();
             allClientes.forEach(System.out::println);
